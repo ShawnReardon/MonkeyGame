@@ -1,13 +1,17 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
         mySprite.vy += -150
+        console.log(mySprite.vy)
     }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sprite, location) {
-    game.over(false)
+    reset()
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.builtin.forestTiles10, function (sprite, location) {
-    game.over(true)
+    for (let value of sprites.allOfKind(SpriteKind.Food)) {
+        value.destroy()
+    }
+    LoadLevel2()
 })
 function doSomething () {
     animation.runImageAnimation(
@@ -101,6 +105,60 @@ function doSomething () {
     100,
     false
     )
+}
+function LoadLevel2 () {
+    scene.setBackgroundColor(6)
+    tiles.setTilemap(tilemap`level2`)
+    for (let value2 of tiles.getTilesByType(assets.tile`myTile1`)) {
+        tiles.placeOnTile(mySprite, value2)
+        scene.cameraFollowSprite(mySprite)
+        tiles.setTileAt(value2, assets.tile`transparency16`)
+    }
+    for (let value2 of tiles.getTilesByType(assets.tile`myTile`)) {
+        banana = sprites.create(assets.image`ban`, SpriteKind.Food)
+        animation.runImageAnimation(
+        banana,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . 5 5 . . . 
+            . . . . . . . . . . 5 5 5 . . . 
+            . . . . . . . . . . 5 5 5 . . . 
+            . . . . . . . . . 5 5 5 5 . . . 
+            . . . . . . . . 5 5 5 5 5 . . . 
+            . . . . . . . . 5 5 5 5 5 . . . 
+            . . . . . . . 5 5 5 5 5 . . . . 
+            . . . . . . 5 5 5 5 5 5 . . . . 
+            . . . . 5 5 5 5 5 5 . . . . . . 
+            . . . 5 5 5 5 5 5 . . . . . . . 
+            . . 5 5 5 5 5 . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . 5 5 . . 
+            . . . . . . . . . . . 5 5 5 . . 
+            . . . . . . . . . 5 5 5 5 5 . . 
+            . . . . . . . . . 5 5 5 5 . . . 
+            . . . . . . . . 5 5 5 5 5 . . . 
+            . . . . . . . 5 5 5 5 5 . . . . 
+            . . . . . 5 5 5 5 5 5 5 . . . . 
+            . . . . 5 5 5 5 5 5 . . . . . . 
+            . . 5 5 5 5 5 . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `],
+        200,
+        true
+        )
+        tiles.placeOnTile(banana, value2)
+        tiles.setTileAt(value2, assets.tile`transparency16`)
+    }
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(1)
@@ -198,6 +256,63 @@ function doSomething2 () {
     100,
     false
     )
+}
+function reset () {
+    for (let value of sprites.allOfKind(SpriteKind.Food)) {
+        value.destroy()
+    }
+    scene.setBackgroundColor(6)
+    tiles.setTilemap(tilemap`level1`)
+    for (let value2 of tiles.getTilesByType(assets.tile`myTile1`)) {
+        tiles.placeOnTile(mySprite, value2)
+        scene.cameraFollowSprite(mySprite)
+        tiles.setTileAt(value2, assets.tile`transparency16`)
+    }
+    for (let value2 of tiles.getTilesByType(assets.tile`myTile`)) {
+        banana = sprites.create(assets.image`ban`, SpriteKind.Food)
+        animation.runImageAnimation(
+        banana,
+        [img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . 5 5 . . . 
+            . . . . . . . . . . 5 5 5 . . . 
+            . . . . . . . . . . 5 5 5 . . . 
+            . . . . . . . . . 5 5 5 5 . . . 
+            . . . . . . . . 5 5 5 5 5 . . . 
+            . . . . . . . . 5 5 5 5 5 . . . 
+            . . . . . . . 5 5 5 5 5 . . . . 
+            . . . . . . 5 5 5 5 5 5 . . . . 
+            . . . . 5 5 5 5 5 5 . . . . . . 
+            . . . 5 5 5 5 5 5 . . . . . . . 
+            . . 5 5 5 5 5 . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `,img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . 5 5 . . 
+            . . . . . . . . . . . 5 5 5 . . 
+            . . . . . . . . . 5 5 5 5 5 . . 
+            . . . . . . . . . 5 5 5 5 . . . 
+            . . . . . . . . 5 5 5 5 5 . . . 
+            . . . . . . . 5 5 5 5 5 . . . . 
+            . . . . . 5 5 5 5 5 5 5 . . . . 
+            . . . . 5 5 5 5 5 5 . . . . . . 
+            . . 5 5 5 5 5 . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `],
+        200,
+        true
+        )
+        tiles.placeOnTile(banana, value2)
+        tiles.setTileAt(value2, assets.tile`transparency16`)
+    }
 }
 let banana: Sprite = null
 let mySprite: Sprite = null
