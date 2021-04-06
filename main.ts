@@ -1,7 +1,7 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
-        mySprite.vy += -150
-        console.log(mySprite.vy)
+    if (prideBoy.isHittingTile(CollisionDirection.Bottom)) {
+        prideBoy.vy += -150
+        console.log(prideBoy.vy)
     }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava0, function (sprite, location) {
@@ -15,94 +15,75 @@ scene.onOverlapTile(SpriteKind.Player, sprites.builtin.forestTiles10, function (
 })
 function doSomething () {
     animation.runImageAnimation(
-    mySprite,
+    prideBoy,
     [img`
-        . . . . f f f f f . . . . . . . 
-        . . . f e e e e e f . . . . . . 
-        . . f d d d d e e e f . . . . . 
-        . c d f d d f d e e f f . . . . 
-        . c d f d d f d e e d d f . . . 
-        c d e e d d d d e e b d c . . . 
-        c d d d d c d d e e b d c . f f 
-        c c c c c d d d e e f c . f e f 
-        . f d d d d d e e f f . . f e f 
-        . . f f f f f e e e e f . f e f 
-        . . . . f e e e e e e e f f e f 
-        . . . f e f f e f e e e e f f . 
-        . . . f e f f e f e e e e f . . 
-        . . . f d b f d b f f e f . . . 
-        . . . f d d c d d b b d f . . . 
-        . . . . f f f f f f f f f . . . 
+        ................
+        ..........99999.
+        ...eeeeeee33333.
+        ..eeeeeeee11111.
+        ..eddddeee33333.
+        ...dd9ddee99999.
+        ...ddddddd22222.
+        ..dddddddd44444.
+        ..eeeeeedd55555.
+        ..eeeeeed.77777.
+        ....eeedd.88888.
+        ......ddd.aaaaa.
+        ......ddd.ff....
+        ......ddd.ff....
+        ..dd6ddddd6dd...
+        ..dd6666666dd...
+        ..dd6666666dd...
+        ..dd6666666dd...
+        ..dd6666666dd...
+        ..dd6666666dd...
+        ..dd6666666dd...
+        ..dd6666666dd...
+        .ddd1115111ddd..
+        .d.d3333333d.d..
+        ....3333333.....
+        ....333.333.....
+        ....333.333.....
+        ....333.333.....
+        ....333.333.....
+        ....333.333.....
+        .111333.333111..
+        .111111.111111..
         `,img`
-        . . . . f f f f f . . . . . . . 
-        . . . f e e e e e f . . . . . . 
-        . . f d d d d e e e f . . . . . 
-        . c d f d d f d e e f . . . . . 
-        . c d f d d f d e e f f . . . . 
-        c d e e d d d d e e d d f . . . 
-        c d d d d c d d e e b d c . . . 
-        c c c c c d d e e e b d c . f f 
-        . f d d d d e e e f f c . f e f 
-        . f f f f f f e e e e f . f e f 
-        . f f f f e e e e e e e f f e f 
-        f d d f d d f e f e e e e f f . 
-        f d b f d b f e f e e e e f . . 
-        f f f f f f f f f f f f e f . . 
-        . . . . . . . . . f c d d f . . 
-        . . . . . . . . . . f f f f . . 
-        `,img`
-        . . . . f f f f f . . . . . . . 
-        . . . f e e e e e f . . . . . . 
-        . . f d d d d e e e f f . . . . 
-        . c d d d d d d e e d d f . . . 
-        . c d f d d f d e e b d c . . . 
-        c d d f d d f d e e b d c . f f 
-        c d e e d d d d e e f c . f e f 
-        c d d d d c d e e e f . . f e f 
-        . f c c c d e e e f f . . f e f 
-        . . f f f f f e e e e f . f e f 
-        . . . . f e e e e e e e f f f . 
-        . . f f e f e e f e e e e f . . 
-        . f e f f e e f f f e e e f . . 
-        f d d b d d c f f f f f f b f . 
-        f d d c d d d f . . f c d d f . 
-        . f f f f f f f . . . f f f . . 
-        `,img`
-        . . . . f f f f f . . . . . . . 
-        . . . f e e e e e f f f . . . . 
-        . . f d d d e e e e d d f . . . 
-        . c d d d d d e e e b d c . . . 
-        . c d d d d d d e e b d c . . . 
-        c d d f d d f d e e f c . f f . 
-        c d d f d d f d e e f . . f e f 
-        c d e e d d d d e e f . . f e f 
-        . f d d d c d e e f f . . f e f 
-        . . f f f d e e e e e f . f e f 
-        . . . . f e e e e e e e f f f . 
-        . . . . f f e e e e e b f f . . 
-        . . . f e f f e e c d d f f . . 
-        . . f d d b d d c f f f . . . . 
-        . . f d d c d d d f f . . . . . 
-        . . . f f f f f f f . . . . . . 
-        `,img`
-        . . . . f f f f f . . . . . . . 
-        . . . f e e e e e f . . . . . . 
-        . . f d d d d e e e f . . . . . 
-        . c d f d d f d e e f f . . . . 
-        . c d f d d f d e e d d f . . . 
-        c d e e d d d d e e b d c . . . 
-        c d d d d c d d e e b d c . . . 
-        c c c c c d d e e e f c . . . . 
-        . f d d d d e e e f f . . . . . 
-        . . f f f f f e e e e f . . . . 
-        . . . . f f e e e e e e f . f f 
-        . . . f e e f e e f e e f . e f 
-        . . f e e f e e f e e e f . e f 
-        . f b d f d b f b b f e f f e f 
-        . f d d f d d f d d b e f f f f 
-        . . f f f f f f f f f f f f f . 
+        ................
+        ..........99999.
+        ...eeeeeee33333.
+        ..eeeeeeee11111.
+        ..eddddeee33333.
+        ...dd9ddee99999.
+        ...ddddddd22222.
+        ..dddddddd44444.
+        ..eeeeeedd55555.
+        ..eeeeeed.77777.
+        ....eeedd.88888.
+        ......ddd.aaaaa.
+        ......ddd.ff....
+        ......ddd.ff....
+        ..dd6ddddd6dd...
+        ..dd6666666dd...
+        ..dd6666666dd...
+        ..dd6666666dd...
+        ..dd6666666dd...
+        ..dd6666666dd...
+        ..dd6666666dd...
+        ..dd6666666dd...
+        .ddd1115111ddd..
+        .d.d3333333d.d..
+        ....3333333.....
+        ....333.333.....
+        ...3333.333.....
+        ...3333.333.....
+        ...333..333.....
+        ...333..333.....
+        111111..333111..
+        111111..111111..
         `],
-    100,
+    200,
     false
     )
 }
@@ -110,8 +91,8 @@ function LoadLevel2 () {
     scene.setBackgroundColor(6)
     tiles.setTilemap(tilemap`level2`)
     for (let value2 of tiles.getTilesByType(assets.tile`myTile1`)) {
-        tiles.placeOnTile(mySprite, value2)
-        scene.cameraFollowSprite(mySprite)
+        tiles.placeOnTile(prideBoy, value2)
+        scene.cameraFollowSprite(prideBoy)
         tiles.setTileAt(value2, assets.tile`transparency16`)
     }
     for (let value2 of tiles.getTilesByType(assets.tile`myTile`)) {
@@ -166,94 +147,75 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
 })
 function doSomething2 () {
     animation.runImageAnimation(
-    mySprite,
+    prideBoy,
     [img`
-        . . . . . . . f f f f f . . . . 
-        . . . . . . f e e e e e f . . . 
-        . . . . . f e e e d d d d f . . 
-        . . . . f f e e d f d d f d c . 
-        . . . f d d e e d f d d f d c . 
-        . . . c d b e e d d d d e e d c 
-        f f . c d b e e d d c d d d d c 
-        f e f . c f e e d d d c c c c c 
-        f e f . . f f e e d d d d d f . 
-        f e f . f e e e e f f f f f . . 
-        f e f f e e e e e e e f . . . . 
-        . f f e e e e f e f f e f . . . 
-        . . f e e e e f e f f e f . . . 
-        . . . f e f f b d f b d f . . . 
-        . . . f d b b d d c d d f . . . 
-        . . . f f f f f f f f f . . . . 
+        ................
+        .99999..........
+        .33333eeeeeee...
+        .11111eeeeeeee..
+        .33333eeedddde..
+        .99999eedd9dd...
+        .22222ddddddd...
+        .44444dddddddd..
+        .55555ddeeeeee..
+        .77777.deeeeee..
+        .88888.ddeee....
+        .aaaaa.ddd......
+        ....ff.ddd......
+        ....ff.ddd......
+        ...dd6ddddd6dd..
+        ...dd6666666dd..
+        ...dd6666666dd..
+        ...dd6666666dd..
+        ...dd6666666dd..
+        ...dd6666666dd..
+        ...dd6666666dd..
+        ...dd6666666dd..
+        ..ddd1115111ddd.
+        ..d.d3333333d.d.
+        .....3333333....
+        .....333.333....
+        .....333.333....
+        .....333.333....
+        .....333.333....
+        .....333.333....
+        ..111333.333111.
+        ..111111.111111.
         `,img`
-        . . . . . . . f f f f f . . . . 
-        . . . . . . f e e e e e f . . . 
-        . . . . . f e e e d d d d f . . 
-        . . . . . f e e d f d d f d c . 
-        . . . . f f e e d f d d f d c . 
-        . . . f d d e e d d d d e e d c 
-        . . . c d b e e d d c d d d d c 
-        f f . c d b e e e d d c c c c c 
-        f e f . c f f e e e d d d d f . 
-        f e f . f e e e e f f f f f f . 
-        f e f f e e e e e e e f f f f . 
-        . f f e e e e f e f d d f d d f 
-        . . f e e e e f e f b d f b d f 
-        . . f e f f f f f f f f f f f f 
-        . . f d d c f . . . . . . . . . 
-        . . f f f f . . . . . . . . . . 
-        `,img`
-        . . . . . . . f f f f f . . . . 
-        . . . . . . f e e e e e f . . . 
-        . . . . f f e e e d d d d f . . 
-        . . . f d d e e d d d d d d c . 
-        . . . c d b e e d f d d f d c . 
-        f f . c d b e e d f d d f d d c 
-        f e f . c f e e d d d d e e d c 
-        f e f . . f e e e d c d d d d c 
-        f e f . . f f e e e d c c c f . 
-        f e f . f e e e e f f f f f . . 
-        . f f f e e e e e e e f . . . . 
-        . . f e e e e f e e f e f f . . 
-        . . f e e e f f f e e f f e f . 
-        . f b f f f f f f c d d b d d f 
-        . f d d c f . . f d d d c d d f 
-        . . f f f . . . f f f f f f f . 
-        `,img`
-        . . . . . . . f f f f f . . . . 
-        . . . . f f f e e e e e f . . . 
-        . . . f d d e e e e d d d f . . 
-        . . . c d b e e e d d d d d c . 
-        . . . c d b e e d d d d d d c . 
-        . f f . c f e e d f d d f d d c 
-        f e f . . f e e d f d d f d d c 
-        f e f . . f e e d d d d e e d c 
-        f e f . . f f e e d c d d d f . 
-        f e f . f e e e e e d f f f . . 
-        . f f f e e e e e e e f . . . . 
-        . . f f b e e e e e f f . . . . 
-        . . f f d d c e e f f e f . . . 
-        . . . . f f f c d d b d d f . . 
-        . . . . . f f d d d c d d f . . 
-        . . . . . . f f f f f f f . . . 
-        `,img`
-        . . . . . . . f f f f f . . . . 
-        . . . . . . f e e e e e f . . . 
-        . . . . . f e e e d d d d f . . 
-        . . . . f f e e d f d d f d c . 
-        . . . f d d e e d f d d f d c . 
-        . . . c d b e e d d d d e e d c 
-        . . . c d b e e d d c d d d d c 
-        . . . . c f e e e d d c c c c c 
-        . . . . . f f e e e d d d d f . 
-        . . . . f e e e e f f f f f . . 
-        f f . f e e e e e e f f . . . . 
-        f e . f e e f e e f e e f . . . 
-        f e . f e e e f e e f e e f . . 
-        f e f f e f b b f b d f d b f . 
-        f f f f e b d d f d d f d d f . 
-        . f f f f f f f f f f f f f . . 
+        ................
+        .99999..........
+        .33333eeeeeee...
+        .11111eeeeeeee..
+        .33333eeedddde..
+        .99999eedd9dd...
+        .22222ddddddd...
+        .44444dddddddd..
+        .55555ddeeeeee..
+        .77777.deeeeee..
+        .88888.ddeee....
+        .aaaaa.ddd......
+        ....ff.ddd......
+        ....ff.ddd......
+        ...dd6ddddd6dd..
+        ...dd6666666dd..
+        ...dd6666666dd..
+        ...dd6666666dd..
+        ...dd6666666dd..
+        ...dd6666666dd..
+        ...dd6666666dd..
+        ...dd6666666dd..
+        ..ddd1115111ddd.
+        ..d.d3333333d.d.
+        .....3333333....
+        .....333.333....
+        .....333.3333...
+        .....333.3333...
+        .....333..333...
+        .....333..333...
+        ..111333..111111
+        ..111111..111111
         `],
-    100,
+    200,
     false
     )
 }
@@ -264,6 +226,7 @@ function reset () {
     scene.setBackgroundColor(6)
     tiles.setTilemap(tilemap`level1`)
     for (let value2 of tiles.getTilesByType(assets.tile`myTile1`)) {
+        let mySprite: Sprite = null
         tiles.placeOnTile(mySprite, value2)
         scene.cameraFollowSprite(mySprite)
         tiles.setTileAt(value2, assets.tile`transparency16`)
@@ -315,30 +278,13 @@ function reset () {
     }
 }
 let banana: Sprite = null
-let mySprite: Sprite = null
+let prideBoy: Sprite = null
 scene.setBackgroundColor(6)
 tiles.setTilemap(tilemap`level1`)
-mySprite = sprites.create(img`
-    . . . . f f f f f . . . . . . . 
-    . . . f e e e e e f . . . . . . 
-    . . f d d d d e e e f . . . . . 
-    . c d f d d f d e e f f . . . . 
-    . c d f d d f d e e d d f . . . 
-    c d e e d d d d e e b d c . . . 
-    c d d d d c d d e e b d c . f f 
-    c c c c c d d d e e f c . f e f 
-    . f d d d d d e e f f . . f e f 
-    . . f f f f f e e e e f . f e f 
-    . . . . f e e e e e e e f f e f 
-    . . . f e f f e f e e e e f f . 
-    . . . f e f f e f e e e e f . . 
-    . . . f d b f d b f f e f . . . 
-    . . . f d d c d d b b d f . . . 
-    . . . . f f f f f f f f f . . . 
-    `, SpriteKind.Player)
-mySprite.ay = 100
-scene.cameraFollowSprite(mySprite)
-controller.moveSprite(mySprite, 100, 0)
+prideBoy = sprites.create(assets.image`prideBoy`, SpriteKind.Player)
+prideBoy.ay = 100
+scene.cameraFollowSprite(prideBoy)
+controller.moveSprite(prideBoy, 100, 0)
 for (let value2 of tiles.getTilesByType(assets.tile`myTile`)) {
     banana = sprites.create(assets.image`ban`, SpriteKind.Food)
     animation.runImageAnimation(
@@ -385,7 +331,7 @@ for (let value2 of tiles.getTilesByType(assets.tile`myTile`)) {
     tiles.setTileAt(value2, assets.tile`transparency16`)
 }
 forever(function () {
-    mySprite.ay = 400
+    prideBoy.ay = 400
     if (controller.left.isPressed()) {
         doSomething()
         pause(350)
